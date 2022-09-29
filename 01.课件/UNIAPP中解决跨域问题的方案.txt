@@ -1,0 +1,12 @@
+一共三种
+	1.使用HBuilderX中内置浏览器
+		最不推荐的解决方法
+
+	2.给项目根路径下添加vue.config.js文件
+		在文件内部配置proxy
+
+		参考文档位置:查看Vue-Cli的官网配置
+
+	3.给manifest.json文件中添加devServer
+		在文件中添加h5->devServer->proxy规则
+		参考文档位置:查看webpack官网配置

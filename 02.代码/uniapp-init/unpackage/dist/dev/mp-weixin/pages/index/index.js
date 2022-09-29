@@ -174,6 +174,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -191,7 +197,8 @@ var _default =
     	核心语法全部使用Vue的
     */
     uni.request({
-      url: "http://localhost:3001/getIndexData",
+      // url:"http://localhost:3001/getIndexData",
+      url: "/api/getIndexData",
       success: function success(res) {
         // console.log('res',res)
         _this.indexData = res.data;

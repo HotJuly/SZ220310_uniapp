@@ -10,7 +10,11 @@
 			<button class="username">七月</button>
 		</view>
 		
-		<scroll-view class="navScroll" scroll-x="true">
+		<scroll-view 
+		class="navScroll" 
+		scroll-x="true"
+		v-if="indexData.kingKongModule"
+		>
 			<view 
 			class="navItem" 
 			:class="{
@@ -20,6 +24,8 @@
 			>
 				推荐
 			</view>
+			
+			<!-- Vue2中,v-for优先级更高,Vue3中,v-if优先级更高-->
 			<view 
 			class="navItem" 
 			v-for="(item,index) in indexData.kingKongModule.kingKongList"
@@ -53,7 +59,8 @@
 				核心语法全部使用Vue的
 			*/
 		   uni.request({
-			   url:"http://localhost:3001/getIndexData",
+			   // url:"http://localhost:3001/getIndexData",
+			   url:"/api/getIndexData",
 			   success:(res)=>{
 				   // console.log('res',res)
 				   this.indexData = res.data;
