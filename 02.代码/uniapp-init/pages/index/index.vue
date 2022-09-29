@@ -9,21 +9,67 @@
 			</view>
 			<button class="username">七月</button>
 		</view>
+		
+		<scroll-view class="navScroll" scroll-x="true">
+			<view 
+			class="navItem" 
+			:class="{
+				active:navIndex===-1
+			}"
+			@click="changeNavIndex(-1)"
+			>
+				推荐
+			</view>
+			<view 
+			class="navItem" 
+			v-for="(item,index) in indexData.kingKongModule.kingKongList"
+			:class="{
+				active:navIndex===index
+			}"
+			:key="item.L1Id"
+			@click="changeNavIndex(index)"
+			>
+				{{item.text}}
+			</view>
+		</scroll-view>
 	</view>
+	
 </template>
 
 <script>
 	export default {
 		data() {
 			return {
-				title:'Hello888'
+				navIndex:-1,
+				indexData:{}
 			}
 		},
-		onLoad(){
-			
+		created(){
+			// console.log('created')
+			/*
+				uniapp中生命周期的选择
+					uniapp同时支持小程序以及Vue的生命周期
+					
+				核心语法全部使用Vue的
+			*/
+		   uni.request({
+			   url:"http://localhost:3001/getIndexData",
+			   success:(res)=>{
+				   // console.log('res',res)
+				   this.indexData = res.data;
+			   }
+		   })
 		},
+		// onLoad(){
+		// 	console.log('onLoad')
+		// },
+		// mounted(){
+		// 	console.log('mounted')
+		// },
 		methods:{
-			
+			changeNavIndex(index){
+				this.navIndex = index;
+			}
 		}
 }
 </script>
@@ -66,4 +112,15 @@
 			font-size 24upx
 			color red
 			margin 0 20upx
+	.navScroll
+		white-space nowrap
+		.navItem
+			display inline-block
+			width 140upx
+			height 80upx
+			line-height 80upx
+			text-align center
+			font-size 28upx
+			&.active
+				border-bottom 4upx solid red
 </style>

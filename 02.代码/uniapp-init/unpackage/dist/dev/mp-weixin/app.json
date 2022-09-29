@@ -8,5 +8,6 @@
     "navigationBarTitleText": "atguigu",
     "navigationBarBackgroundColor": "#BB2C08"
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
 }

@@ -38,4 +38,18 @@
   color: #f00;
   margin: 0 20rpx;
 }
+.indexContainer .navScroll {
+  white-space: nowrap;
+}
+.indexContainer .navScroll .navItem {
+  display: inline-block;
+  width: 140rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+.indexContainer .navScroll .navItem.active {
+  border-bottom: 4rpx solid #f00;
+}
 

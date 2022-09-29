@@ -136,7 +136,31 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -154,13 +178,37 @@ var _default =
 {
   data: function data() {
     return {
-      title: 'Hello888' };
+      navIndex: -1,
+      indexData: {} };
 
   },
-  onLoad: function onLoad() {
+  created: function created() {var _this = this;
+    // console.log('created')
+    /*
+    	uniapp中生命周期的选择
+    		uniapp同时支持小程序以及Vue的生命周期
+    		
+    	核心语法全部使用Vue的
+    */
+    uni.request({
+      url: "http://localhost:3001/getIndexData",
+      success: function success(res) {
+        // console.log('res',res)
+        _this.indexData = res.data;
+      } });
 
   },
-  methods: {} };exports.default = _default;
+  // onLoad(){
+  // 	console.log('onLoad')
+  // },
+  // mounted(){
+  // 	console.log('mounted')
+  // },
+  methods: {
+    changeNavIndex: function changeNavIndex(index) {
+      this.navIndex = index;
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 18 */
