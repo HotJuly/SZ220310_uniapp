@@ -50,7 +50,7 @@
 				indexData:{}
 			}
 		},
-		created(){
+		async created(){
 			// console.log('created')
 			/*
 				uniapp中生命周期的选择
@@ -58,14 +58,17 @@
 					
 				核心语法全部使用Vue的
 			*/
-		   uni.request({
-			   // url:"http://localhost:3001/getIndexData",
-			   url:"/api/getIndexData",
-			   success:(res)=>{
-				   // console.log('res',res)
-				   this.indexData = res.data;
-			   }
-		   })
+		   // uni.request({
+			  //  url:"http://localhost:3001/getIndexData",
+			  //  // url:"/api/getIndexData",
+			  //  success:(res)=>{
+				 //   // console.log('res',res)
+				 //   this.indexData = res.data;
+			  //  }
+		   // })
+		   
+		   const result = await this.$myAxios("/getIndexData");
+		   this.indexData = result;
 		},
 		// onLoad(){
 		// 	console.log('onLoad')
