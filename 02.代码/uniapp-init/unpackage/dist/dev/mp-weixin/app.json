@@ -1,0 +1,12 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "atguigu",
+    "navigationBarBackgroundColor": "#FF0000"
+  },
+  "usingComponents": {}
+}
