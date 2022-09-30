@@ -2101,6 +2101,7 @@ uni$1;exports.default = _default;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var state = {
   cartList: [{
+    "selected": true,
     "count": 2,
     "promId": 0,
     "showPoints": false,
@@ -2175,6 +2176,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     "itemSizeTableFlag": false },
 
   {
+    "selected": false,
     "count": 6,
     "promId": 0,
     "showPoints": false,
@@ -2301,12 +2303,57 @@ var mutations = {
       state.cartList.push(good);
       // console.log('=1', good)
     }
+  },
+  CHANGECOUNTMUTATION: function CHANGECOUNTMUTATION(state, _ref)
+
+
+  {var type = _ref.type,index = _ref.index;
+    var shopItem = state.cartList[index];
+    if (type) {
+      shopItem.count++;
+    } else {
+      if (shopItem.count === 1) {
+        // 在Vue2中,直接使用数组下标操作数据,没有响应式效果
+        // 因为数组的下标不是响应式属性
+        // state.cartList[index] = null;
+        state.cartList.splice(index, 1);
+      } else {
+        shopItem.count--;
+      }
+    }
+  },
+  CHANGESELECTEDMUTATION: function CHANGESELECTEDMUTATION(state, index) {
+    var shopItem = state.cartList[index];
+    shopItem.selected = !shopItem.selected;
+  },
+  CHANGESELECTEDALLMUTATION: function CHANGESELECTEDALLMUTATION(state, selected) {
+    var result = state.cartList.forEach(function (shopItem) {
+      shopItem.selected = selected;
+      // return 123;
+    });
+    // console.log('111',result);
   } };
 
 
 var actions = {};
 
-var getters = {};var _default =
+var getters = {
+  isSelectedAll: function isSelectedAll(state) {
+    /*
+                                                	返回值数据类型:布尔值
+                                                	需求:
+                                                		1.如果购物车中所有的商品都是选中状态,那么就返回true
+                                                		2.如果购物车中有一个或以上的商品是未选中状态,那么就返回false
+                                                		3.如果购物车中没有商品,那么就返回false
+                                                
+                                                */
+    if (!state.cartList.length) return false;
+    var result = state.cartList.every(function (shopItem) {
+      return shopItem.selected;
+    });
+    return result;
+  } };var _default =
+
 
 
 {

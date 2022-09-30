@@ -1,5 +1,6 @@
 const state = {
 	cartList: [{
+			"selected": true,
 			"count": 2,
 			"promId": 0,
 			"showPoints": false,
@@ -48,7 +49,7 @@ const state = {
 			"primarySkuPreSellStatus": 0,
 			"extraServiceFlag": 0,
 			"flashPageLink": "",
-		 "autoOnsaleTimeLeft": 0,
+			"autoOnsaleTimeLeft": 0,
 			"innerData": {},
 			"saleCenterSkuId": 0,
 			"pointsStatus": 0,
@@ -66,7 +67,7 @@ const state = {
 			"pointsPrice": 0,
 			"simpleDesc": "色拉姆发热面料，加厚升级",
 			"seoTitle": "",
-		 "newItemFlag": false,
+			"newItemFlag": false,
 			"buttonType": 0,
 			"primarySkuId": 1636062,
 			"displaySkuId": 1636056,
@@ -74,6 +75,7 @@ const state = {
 			"itemSizeTableFlag": false
 		},
 		{
+			"selected": false,
 			"count": 6,
 			"promId": 0,
 			"showPoints": false,
@@ -99,7 +101,7 @@ const state = {
 			"underShelf": false,
 			"status": 2,
 			"couponConflict": true,
-		 "forbiddenBuy": false,
+			"forbiddenBuy": false,
 			"promotionDesc": "暖冬特惠",
 			"limitedFlag": 204,
 			"pieceNum": 0,
@@ -196,16 +198,61 @@ const mutations = {
 			// console.log('+1', shopItem)
 		} else {
 			// good.count = 1;
-			this._vm.$set(good,'count',1);
+			this._vm.$set(good, 'count', 1);
 			state.cartList.push(good);
 			// console.log('=1', good)
 		}
+	},
+	CHANGECOUNTMUTATION(state, {
+		type,
+		index
+	}) {
+		const shopItem = state.cartList[index];
+		if (type) {
+			shopItem.count++;
+		} else {
+			if (shopItem.count === 1) {
+				// 在Vue2中,直接使用数组下标操作数据,没有响应式效果
+				// 因为数组的下标不是响应式属性
+				// state.cartList[index] = null;
+				state.cartList.splice(index, 1);
+			} else {
+				shopItem.count--;
+			}
+		}
+	},
+	CHANGESELECTEDMUTATION(state,index){
+		const shopItem = state.cartList[index];
+		shopItem.selected = !shopItem.selected;
+	},
+	CHANGESELECTEDALLMUTATION(state,selected){
+		const result = state.cartList.forEach((shopItem)=>{
+			shopItem.selected=selected
+			// return 123;
+		})
+		// console.log('111',result);
 	}
 };
 
 const actions = {};
 
-const getters = {};
+const getters = {
+	isSelectedAll(state){
+		/*
+			返回值数据类型:布尔值
+			需求:
+				1.如果购物车中所有的商品都是选中状态,那么就返回true
+				2.如果购物车中有一个或以上的商品是未选中状态,那么就返回false
+				3.如果购物车中没有商品,那么就返回false
+		
+		*/
+	   if(!state.cartList.length)return false;
+	   const result = state.cartList.every((shopItem)=>{
+		   return shopItem.selected
+	   })
+		return result;
+	}
+};
 
 
 export default {
