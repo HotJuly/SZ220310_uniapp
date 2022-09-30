@@ -54,6 +54,27 @@ router.get("/getCategoryDatas",function(ctx,next){
 	ctx.body=categoryDatas
 })
 
+// 用于返回首页分类相关数据
+const indexCateList = require('./datas/indexCateList.json');
+router.get("/getIndexCateList",async function(ctx,next){
+	await new Promise((resolve)=>{
+		setTimeout(resolve,2000);
+	})
+	ctx.body=indexCateList
+})
+
+// 用于返回某个商品的详细信息
+const goods = require('./datas/goods.json');
+router.get("/getGoodDetail",async function(ctx,next){
+	// koa中通过ctx.query可以获取到用户传递的query参数
+	const goodId = ctx.query.goodId;
+	// find方法没找到东西会返回undefined
+	const good = goods.find((good)=>{
+		return good.id === goodId>>>0;
+	})
+	ctx.body = good||{};
+})
+
 
 // 3.将服务器应用实例对象运行在电脑的某个端口上
 app.listen('3001',function(){

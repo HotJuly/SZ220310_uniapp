@@ -41,7 +41,7 @@
 		
 		<scroll-view class="contentScroll" scroll-y="true">
 			<Recommend v-if="navIndex===-1" :indexData="indexData"></Recommend>
-			<CateList v-else></CateList>
+			<CateList v-else :navIndex="navIndex"></CateList>
 		</scroll-view>
 	</view>
 </template>
