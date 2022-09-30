@@ -38,11 +38,17 @@
 				{{item.text}}
 			</view>
 		</scroll-view>
+		
+		<scroll-view class="contentScroll" scroll-y="true">
+			<Recommend v-if="navIndex===-1" :indexData="indexData"></Recommend>
+			<CateList v-else></CateList>
+		</scroll-view>
 	</view>
-	
 </template>
 
 <script>
+	import Recommend from '../../components/Recommend/Recommend.vue';
+	import CateList from '../../components/CateList/CateList.vue';
 	import {mapActions} from 'vuex';
 	export default {
 		data() {
@@ -116,7 +122,11 @@
 				return this.$store.state.home.indexData;
 			}
 		},
-		watch:{}
+		watch:{},
+		components:{
+			Recommend,
+			CateList
+		}
 }
 </script>
 
@@ -169,4 +179,15 @@
 			font-size 28upx
 			&.active
 				border-bottom 4upx solid red
+	.contentScroll
+		// 小程序height=100vh - header高度 - nav高度
+		// 浏览器height=100vh - header高度 - nav高度 - 导航栏高度 - tabBar高度
+		// height calc( 100vh - 80upx - 84upx - 88upx - 100upx )
+		// /* #ifdef MP */
+		// height calc( 100vh - 80upx - 84upx)
+		// /* #endif */
+		// /* #ifdef H5 */
+		// height calc( 100vh - 80upx - 84upx - 88upx - 100upx )
+		// /* #endif */
+		height calc( 100vh - 80upx - 84upx - var(--window-top) - var(--window-bottom) )
 </style>

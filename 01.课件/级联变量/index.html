@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        :root{
+            --global-color:blue;
+        }
+        .box{
+            width:200px;
+            height:200px;
+        }
+        .box1{
+            color:var(--global-color);
+            border:1px solid var(--global-color);
+        }
+        .box2{
+            background-color: var(--global-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="box box1">
+        box1
+    </div>
+    <div class="box box2">
+        box2
+    </div>
+    <input id="colorInput" type="text">
+    <button id="btn">变色</button>
+    <script>
+        btn.onclick=function(){
+            // console.log('btn')
+            const value = colorInput.value||"black";
+
+            // document.documentElement.style.fontSize="100px"
+            document.documentElement.style.setProperty("--global-color",value)
+        }
+    </script>
+</body>
+</html>
