@@ -43,11 +43,12 @@
 </template>
 
 <script>
+	import {mapActions} from 'vuex';
 	export default {
 		data() {
 			return {
 				navIndex:-1,
-				indexData:{}
+				// indexData:{}
 			}
 		},
 		async created(){
@@ -67,8 +68,19 @@
 			  //  }
 		   // })
 		   
-		   const result = await this.$myAxios("/getIndexData");
-		   this.indexData = result;
+		   // const result = await this.$myAxios("/getIndexData");
+		   // this.indexData = result;
+		   
+		   // 第一种触发方式
+		   // this.$store.dispatch('getIndexData');
+		   
+		   // 第二,四,五种触发方式
+		   this.getIndexData();
+		   
+		   // 第三种触发方式
+		   // this["home/getIndexData"]()
+		   
+		   
 		},
 		// onLoad(){
 		// 	console.log('onLoad')
@@ -79,8 +91,32 @@
 		methods:{
 			changeNavIndex(index){
 				this.navIndex = index;
+			},
+			
+			// 第二种写法
+			// ...mapActions(["getIndexData"]),
+			// getIndexData(){
+			// 	this.$store.dispatch('getIndexData');
+			// }
+			
+			// 第三种写法
+			// ...mapActions(["home/getIndexData"]),
+			
+			// 第四种写法
+			// ...mapActions("home",["getIndexData"]),
+			
+			// 第五种写法
+			...mapActions("home",{
+				getIndexData:"getIndexData"
+			}),
+			// ...mapActions("cart",["getIndexData"]),
+		},
+		computed:{
+			indexData(){
+				return this.$store.state.home.indexData;
 			}
-		}
+		},
+		watch:{}
 }
 </script>
 

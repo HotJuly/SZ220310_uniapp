@@ -1,5 +1,6 @@
 import App from './App'
 import Vue from 'vue'
+import store from './store/index.js';
 
 import myAxios from 'utils/myAxios.js';
 
@@ -12,7 +13,8 @@ App.mpType = 'app'
 Vue.prototype.$myAxios = myAxios;
 
 const app = new Vue({
-    ...App
+    ...App,
+	store
 	// onLaunch: function() {
 	// 	console.log('App Launch')
 	// },
