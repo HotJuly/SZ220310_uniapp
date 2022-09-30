@@ -42,9 +42,16 @@ router.get("/test",function(ctx,next){
 	ctx.body="请求test接口成功"
 })
 
+// 用于返回首页推荐区域相关数据
 const indexData = require('./datas/index.json');
 router.get("/getIndexData",function(ctx,next){
 	ctx.body=indexData
+})
+
+// 用于返回分类页面相关数据
+const categoryDatas = require('./datas/categoryDatas.json');
+router.get("/getCategoryDatas",function(ctx,next){
+	ctx.body=categoryDatas
 })
 
 
